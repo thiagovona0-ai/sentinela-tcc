@@ -1,0 +1,8 @@
+{
+  "name": "sentinela-tcc",
+  "version": "1.0.0",
+  "private": true,
+  "engines": { "node": ">=20" },
+  "description": "Protótipo acadêmico de consulta de reputação usando a API pública do VirusTotal",
+  "scripts": { "start": "node server.js" }
+}
