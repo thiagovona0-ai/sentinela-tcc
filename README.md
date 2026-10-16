@@ -34,10 +34,11 @@ O nível Free do Render pode suspender a aplicação após inatividade, levando 
 ## Funcionalidades
 
 - Consultas de URL, hash MD5/SHA-1/SHA-256, domínio e endereço IP.
-- Envio de arquivo e acompanhamento da análise, com limite local padrão de 32 MB.
-- Exibição de contagens, atributos disponíveis e detecções reportadas.
+- Envio de arquivo e acompanhamento da análise, com limite de 32 MB imposto pela API pública.
+- Envio explícito de URLs que ainda não possuem relatório.
+- Exibição de todos os mecanismos retornados, com filtro, busca, dados completos da resposta e atalho para o relatório do VirusTotal.
 - Tratamento de erros de chave, permissões, limites, ausência de dados e indisponibilidade.
-- Limite de solicitações por endereço para reduzir abuso da aplicação.
+- Limite de solicitações por endereço e fila global para respeitar a cota da chave.
 - Cabeçalhos básicos de segurança e verificação de saúde em `/health`.
 
 ## Configuração opcional
@@ -51,6 +52,7 @@ O nível Free do Render pode suspender a aplicação após inatividade, levando 
 
 Arquivos enviados são encaminhados ao VirusTotal e podem ser compartilhados sob os termos do serviço. Não envie dados confidenciais ou conteúdo sem autorização. URLs podem conter tokens e informações privadas; considere hashes para consultas de arquivos já conhecidos. Este protótipo não mantém banco de dados nem histórico próprio.
 
-A API pública documenta 4 requisições por minuto e até 500 por dia, além de restrições de uso. A aplicação não contorna cotas: o uso é compartilhado pela chave configurada. A disponibilidade de determinados endpoints depende do nível de acesso da chave. Leia os [termos e limites da API](https://docs.virustotal.com/reference/public-vs-premium-api) e [visão geral da API](https://docs.virustotal.com/docs/api-overview) antes de colocar o serviço à disposição de outras pessoas.
+A API pública documenta 4 requisições por minuto e até 500 por dia, além de restrições de uso. A aplicação organiza as consultas para não ultrapassar 4 solicitações por minuto por processo, mas a cota diária continua sendo compartilhada por todos os visitantes. A disponibilidade de determinados endpoints depende do nível de acesso da chave. Consultar e enviar indicadores ao VirusTotal pode adicioná-los ao conjunto de dados público; não envie dados confidenciais. A API pública não disponibiliza todos os recursos premium do VirusTotal, então esta aplicação apresenta todos os campos e mecanismos retornados pelos endpoints utilizados e oferece um atalho para abrir o relatório completo no próprio VirusTotal. Leia os [termos e limites da API](https://docs.virustotal.com/reference/public-vs-premium-api) e [visão geral da API](https://docs.virustotal.com/reference/overview) antes de colocar o serviço à disposição de outras pessoas.
 
 Esta é uma base pronta para implantação acadêmica e demonstração. Para uso público com múltiplos usuários, acrescente autenticação, monitoramento, proteção contra abuso distribuído, políticas de privacidade e análise das exigências de licença aplicáveis.
+
