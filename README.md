@@ -1,5 +1,7 @@
 # duckspy
 
+**Site público:** https://duckspy.onrender.com
+
 Aplicação acadêmica independente para consultar reputação de URLs, hashes, domínios e endereços IP, além de enviar arquivos para análise via API v3 do VirusTotal. A chave da API permanece no servidor. O projeto não é afiliado ao VirusTotal/Google e não substitui antivírus.
 
 ## Rodar localmente
