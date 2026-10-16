@@ -1,6 +1,6 @@
 $ErrorActionPreference = 'Stop'
 
-Write-Host 'Sentinela - inicialização local' -ForegroundColor Cyan
+Write-Host 'duckspy - inicialização local' -ForegroundColor Cyan
 Write-Host 'Cole sua chave privada do VirusTotal. Ela não será exibida nem salva em arquivo.'
 $secureKey = Read-Host 'Chave da API' -AsSecureString
 $pointer = [Runtime.InteropServices.Marshal]::SecureStringToBSTR($secureKey)

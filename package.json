@@ -1,8 +1,13 @@
 {
-  "name": "sentinela-tcc",
+  "name": "duckspy",
   "version": "1.0.0",
   "private": true,
-  "engines": { "node": ">=20" },
-  "description": "Protótipo acadêmico de consulta de reputação usando a API pública do VirusTotal",
-  "scripts": { "start": "node server.js" }
+  "engines": {
+    "node": ">=20"
+  },
+  "description": "Aplicação acadêmica independente para análise de URLs, arquivos, domínios e endereços IP com a API do VirusTotal",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test"
+  }
 }

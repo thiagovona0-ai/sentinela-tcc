@@ -1,4 +1,4 @@
-# Sentinela
+# duckspy
 
 Aplicação acadêmica independente para consultar reputação de URLs, hashes, domínios e endereços IP, além de enviar arquivos para análise via API v3 do VirusTotal. A chave da API permanece no servidor. O projeto não é afiliado ao VirusTotal/Google e não substitui antivírus.
 
@@ -13,7 +13,7 @@ $env:VT_API_KEY = "SUA_CHAVE_DO_VIRUSTOTAL"
 npm start
 ```
 
-Abra `http://localhost:3000`. A chave pode ser obtida na conta VirusTotal Community. Nunca a coloque no HTML, JavaScript do navegador ou em um repositório público.
+Abra `http://localhost:3000`. A chave deve ser obtida na conta VirusTotal Community e configurada somente como variável secreta do servidor. Nunca a coloque no HTML, JavaScript do navegador ou em um repositório público. Para executar os testes automatizados, use `npm test`.
 
 ## Publicar no Render
 
@@ -21,7 +21,7 @@ O arquivo `render.yaml` descreve um serviço web com implantação pelo Git. Col
 
 Você também pode criar um Web Service manualmente com:
 
-- Root Directory: `sentinela` (se a pasta estiver dentro de um repositório maior)
+- Root Directory: deixe vazio quando este projeto estiver na raiz do repositório.
 - Build Command: `npm install`
 - Start Command: `npm start`
 - Environment: `VT_API_KEY` com a chave privada

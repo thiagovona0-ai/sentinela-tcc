@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: sentinela-tcc
+    name: duckspy
     runtime: node
     plan: free
     buildCommand: npm install

@@ -13,7 +13,7 @@ const WINDOW_MS = 60_000;
 const MAX_REQUESTS = Math.max(4,Math.min(Number(process.env.APP_RATE_LIMIT)||20,120));
 const requests = new Map();
 const vtRequestTimes=[];
-const MIME = { '.html':'text/html; charset=utf-8', '.css':'text/css; charset=utf-8', '.js':'text/javascript; charset=utf-8', '.json':'application/json; charset=utf-8', '.svg':'image/svg+xml', '.png':'image/png', '.ico':'image/x-icon' };
+const MIME = { '.html':'text/html; charset=utf-8', '.css':'text/css; charset=utf-8', '.js':'text/javascript; charset=utf-8', '.json':'application/json; charset=utf-8', '.svg':'image/svg+xml', '.png':'image/png', '.jpg':'image/jpeg', '.jpeg':'image/jpeg', '.ico':'image/x-icon' };
 
 function send(res, status, data, type='application/json; charset=utf-8', extra={}) {
   res.writeHead(status, { 'Content-Type':type, 'Cache-Control':'no-store', 'X-Content-Type-Options':'nosniff', 'X-Frame-Options':'DENY', 'Referrer-Policy':'strict-origin-when-cross-origin', 'Content-Security-Policy':"default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self'; connect-src 'self'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'", ...extra });
@@ -109,13 +109,13 @@ const server=http.createServer(async(req,res)=>{
     }
     if(req.method==='GET') {
       const pathname=url.pathname==='/'?'/index.html':url.pathname;
-      const filename=path.resolve(ROOT,`.${decodeURIComponent(pathname)}`);
-      if(!filename.startsWith(ROOT+path.sep)) return send(res,403,{error:'Acesso negado.'});
+      const publicFiles=new Set(['/index.html','/style.css','/app.js','/mascote-transparente.png']);
+      if(!publicFiles.has(pathname)) return send(res,404,{error:'Página não encontrada.'});
+      const filename=path.join(ROOT,pathname.slice(1));
       fs.readFile(filename,(err,data)=>err?send(res,404,{error:'Página não encontrada.'}):send(res,200,data,MIME[path.extname(filename)]||'application/octet-stream',{ 'Cache-Control':['.html','.css','.js'].includes(path.extname(filename))?'no-cache':'public, max-age=3600' }));
       return;
     }
     send(res,405,{error:'Método não permitido.'},'application/json; charset=utf-8',{'Allow':'GET, POST'});
   } catch(e) { const result=parseError(e); send(res,result.status,result.body); }
 });
-server.listen(PORT,'0.0.0.0',()=>console.log(`Sentinela disponível na porta ${PORT}`));
-
+server.listen(PORT,'0.0.0.0',()=>console.log(`duckspy disponível na porta ${PORT}`));
